@@ -13,7 +13,7 @@ Here are examples usages of current commands that Astronomer has:
 ### $locate {object}, $locate_random 
 Display information about any celestial object in the sky. 
 
-![locate](https://github.com/aftwasiq/discord.py-Astronomy-Bot/assets/97777254/67603477-3b05-4854-b449-ac15c5c5f3c6)
+![Screenshot 2024-03-06 211445](https://github.com/aftwasiq/discord.py-Astronomy-Bot/assets/97777254/4d1701ea-033b-4489-bfee-f6691b80896c)
 
 ### $photo today, $photo yesterday, $photo YYYY-MM-DD
 Display NASAs APOD (Photo of the day) for today, yesterday, or another specified date.
