@@ -1,4 +1,4 @@
-## Astronomer [v1.0.1]
+## Astronomer [v1.4]
 
 Astronomer is a discord bot that allows you to peer into the skies and gain information on any celestial object; star, galaxy, or planet. You can also look at NASAs photo of the day, asteroids passing Earth, space-related news, and much more. You can add this bot to your discord server using this [link](https://discord.com/oauth2/authorize?client_id=1214283242887319592&permissions=27465313210048&scope=bot)
 
