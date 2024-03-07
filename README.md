@@ -11,7 +11,9 @@ Astronomer currently runs 24/7 on a Heroku Server.
 ### What each file is used for:
 
 `AstronomyBot.py`  |  Main python file which handles all the bots processes and how it works.
+ 
 `Procfile`         |  Heroku procfile that specifies the commands to be executed for the app on startup. (in this case; bot).
+ 
 `requirements.txt` |  A file containing all the packages and libraries required for application installation. 
 
 
