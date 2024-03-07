@@ -6,6 +6,8 @@ Push **$astronomy_help** on a discord chat that Astronomer has access to, in ord
 
 Astronomers features are limited at the moment, and many more are to come as I improve the bot further. This is the first (proper) Discord Bot I've made, which utilizes web-scraping, and integration of NASA Open APIs, Wikipedia Public APIs, and News APIs to fetch and display dynamic content related to celestial objects, space news, and astronomy.
 
+Astronomer currently runs 24/7 on a Heroku Server.
+
 Here are examples usages of current commands that Astronomer has: 
 
 ### $locate {object}, $locate_random 
