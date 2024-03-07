@@ -2,12 +2,21 @@ import discord
 from discord.ext import commands
 import bs4
 from bs4 import BeautifulSoup
+
 import requests
 import datetime
 import mwapi
 import wikipediaapi
 import asyncio
 import random
+
+#I have this list of Celestial Bodies for randomization as some objects dont fullfill all the list of attributes, so instead of searching for random one on wikipedia, it'll get a random one from here than get it's info. When a user does $locate_random, I don't want them to find an object that only has some attributes. Of course, I still have to troubleshoot further in order to make sure every object flawlessly showcases every single attribute, until then I'll just keep adding objects I think are cool (and fullfill the object requirements) to this list.
+
+CELESTIAL_BODIES = [
+    "Antares", "Proxima Centauri", "Betelgeuse", "Aldebaran", "Altair",
+    "Andromeda Galaxy", "Pinwheel Galaxy", "Black Eye Galaxy", "Messier 81",
+    "Cygnus X-1", "TON 618", "Sagittarius A*"
+]
 
 random_objects_settings = {}
 
@@ -16,7 +25,9 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="$", intents=intents)
 
-#APIs were written here, removed for privacy
+#News and NASA APIS
+NASA_API = "{}"
+NEWS_API = "{}"
 
 def collect_asteroids(start, end):
     response = requests.get(f"https://api.nasa.gov/neo/rest/v1/feed?start_date={start}&end_date={end}&api_key={NASA_API}")
@@ -42,9 +53,9 @@ async def locate_celestial_object(ctx, celestial_object):
         response = session.get(action="parse", page=celestial_object, prop="text", format="json")
         html = response["parse"]["text"]["*"]
 
-        astronomical_terms = ["supernova", "nebula", "white dwarf", "red giant", "main sequence", "stellar", "magnitude",
-                              "orbit", "ecliptic", "aphelion", "perihelion", "astronomical unit", "gas giant", "terrestrial",
-                              "spiral", "elliptical", "lenticular", "irregular", "galactic", "interstellar", "cosmic", "exoplanet"]
+        astronomical_terms = ["supernova", "nebula", "stellar", "planet",
+                              "galactic", "interstellar", "cosmic", "exoplanet"
+                             "galaxy", "binary star", "constellation", "light years"]
 
         if not any(term in html.lower() for term in astronomical_terms):
             await ctx.send(f"> {celestial_object} does not appear to be an astronomical object. Push **$astronomy_help** if you are having issues.")
@@ -58,7 +69,7 @@ async def locate_celestial_object(ctx, celestial_object):
         page_data = list(response["query"]["pages"].values())[0]
         summary = page_data.get("extract", "No information available.")
 
-        sentences = '. '.join(summary.split('.')[:6])
+        sentences = '. '.join(summary.split('.')[:5])
 
         embed = discord.Embed(title=f"{celestial_object.upper()}", description=sentences, color=discord.Color.blue())
 
@@ -81,8 +92,29 @@ async def locate_celestial_object(ctx, celestial_object):
                     elif "Distance" in header.text and ("Earth" in header.text or "Sun" in header.text):
                         embed.add_field(name=f"`Distance from Earth:` {data.text}", value = "", inline=False)
                         
-                    elif "Evolutionary stage" in header.text:
-                        embed.add_field(name=f"`Type:` {data.text}", value = "", inline=False)
+                    elif "Evolutionary" in header.text:
+                        embed.add_field(name=f"`Evolutionary Stage:` {data.text}", value = "", inline=False)
+                        
+                    elif "Redshift" in header.text:
+                        embed.add_field(name=f"`Redshift:` {data.text}", value = "", inline=False)
+                        
+                    elif "Luminosity" in header.text:
+                        embed.add_field(name=f"`Luminosity:` {data.text}", value = "", inline=False)
+                        
+                    elif "Temperature" in header.text:
+                        embed.add_field(name=f"`Temperature:` {data.text}", value = "", inline=False)
+                        
+                    elif "Discovery date" in header.text:
+                        embed.add_field(name=f"`Discovery date:` {data.text}", value = "", inline=False)
+                        
+                    elif "Star" in header.text:
+                        embed.add_field(name=f"`Orbiting Star:` {data.text}", value = "", inline=False)
+                        
+                    elif "Inclination" in header.text:
+                        embed.add_field(name=f"`Inclination:` {data.text}", value = "", inline=False)
+                        
+                    elif "Surface gravity" in header.text:
+                        embed.add_field(name=f"`Surface gravity:` {data.text}", value = "", inline=False)
                         
                     elif "Right ascension" in header.text:
                         embed.add_field(name=f"`Right Ascension:` {data.text}", value = "", inline=False) 
@@ -132,9 +164,9 @@ async def locate(ctx, *, celestial_object):
         response = session.get(action="parse", page=celestial_object, prop="text", format="json")
         html = response["parse"]["text"]["*"]
 
-        astronomical_terms = ["supernova", "nebula", "white dwarf", "red giant", "main sequence", "stellar", "magnitude",
-                              "orbit", "ecliptic", "aphelion", "perihelion", "astronomical unit", "gas giant", "terrestrial",
-                              "spiral", "elliptical", "lenticular", "irregular", "galactic", "interstellar", "cosmic", "exoplanet"]
+        astronomical_terms = ["supernova", "nebula", "stellar", "planet",
+                              "galactic", "interstellar", "cosmic", "exoplanet"
+                             "galaxy", "binary star", "constellation", "light years"]
 
         if not any(term in html.lower() for term in astronomical_terms):
             await ctx.send(f"> {celestial_object} does not appear to be an astronomical object. Push **$astronomy_help** if you are having issues.")
@@ -148,7 +180,7 @@ async def locate(ctx, *, celestial_object):
         page_data = list(response["query"]["pages"].values())[0]
         summary = page_data.get("extract", "No information available.")
 
-        sentences = '. '.join(summary.split('.')[:6])
+        sentences = '. '.join(summary.split('.')[:5])
 
         embed = discord.Embed(title=f"{celestial_object.upper()}", description=sentences, color=discord.Color.blue())
 
@@ -171,8 +203,29 @@ async def locate(ctx, *, celestial_object):
                     elif "Distance" in header.text and ("Earth" in header.text or "Sun" in header.text):
                         embed.add_field(name=f"`Distance from Earth:` {data.text}", value = "", inline=False)
                         
-                    elif "Evolutionary stage" in header.text:
-                        embed.add_field(name=f"`Type:` {data.text}", value = "", inline=False)
+                    elif "Evolutionary" in header.text:
+                        embed.add_field(name=f"`Evolutionary Stage:` {data.text}", value = "", inline=False)
+                        
+                    elif "Redshift" in header.text:
+                        embed.add_field(name=f"`Redshift:` {data.text}", value = "", inline=False)
+                        
+                    elif "Luminosity" in header.text:
+                        embed.add_field(name=f"`Luminosity:` {data.text}", value = "", inline=False)
+                        
+                    elif "Temperature" in header.text:
+                        embed.add_field(name=f"`Temperature:` {data.text}", value = "", inline=False)
+                        
+                    elif "Discovery date" in header.text:
+                        embed.add_field(name=f"`Discovery date:` {data.text}", value = "", inline=False)
+                        
+                    elif "Star" in header.text:
+                        embed.add_field(name=f"`Orbiting Star:` {data.text}", value = "", inline=False)
+                        
+                    elif "Inclination" in header.text:
+                        embed.add_field(name=f"`Inclination:` {data.text}", value = "", inline=False)
+                        
+                    elif "Surface gravity" in header.text:
+                        embed.add_field(name=f"`Surface gravity:` {data.text}", value = "", inline=False)
                         
                     elif "Right ascension" in header.text:
                         embed.add_field(name=f"`Right Ascension:` {data.text}", value = "", inline=False) 
@@ -337,4 +390,5 @@ async def astronomy_help(ctx):
     
     await ctx.send(embed = embed)
 
-bot.run()
+bot.run(token)
+
