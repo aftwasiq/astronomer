@@ -9,12 +9,6 @@ import wikipediaapi
 import asyncio
 import random
 
-CELESTIAL_BODIES = [
-    "Antares", "Proxima Centauri", "Betelgeuse", "Aldebaran", "Altair",
-    "Andromeda Galaxy", "Pinwheel Galaxy", "Black Eye Galaxy", "Messier 81",
-    "Cygnus X-1", "TON 618", "Sagittarius A*"
-]
-
 random_objects_settings = {}
 
 intents = discord.Intents.default()
