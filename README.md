@@ -1,12 +1,12 @@
 ## Astronomer [v1.0.1]
 
-Astronomer is a discord bot that allows you to peer into the skies and gain information on any celestial object; star, galaxy, or planet. You can also look at NASAs photo of the day, asteroids passing Earth, space-related news, and much more.
+Astronomer is a discord bot that allows you to peer into the skies and gain information on any celestial object; star, galaxy, or planet. You can also look at NASAs photo of the day, asteroids passing Earth, space-related news, and much more. You can add this bot to your discord server using this [link](https://discord.com/oauth2/authorize?client_id=1214283242887319592&permissions=27465313210048&scope=bot)
 
 Push **$astronomy_help** on a discord chat that Astronomer has access to, in order to begin configuration or see a list of already-available commands to use. As of 2023/03/06, Astronomer is currently used in 10+ Discord Servers.
 
 Astronomers features are limited at the moment, and many more are to come as I improve the bot further. This is the first (proper) Discord Bot I've made, which utilizes web-scraping, and integration of NASA Open APIs, Wikipedia Public APIs, and News APIs to fetch and display dynamic content related to celestial objects, space news, and astronomy. In all honesty, it may be a tad-bit messy, but I do plan on reworking several parts of it as time goes, depending on how popular the bot gets.
 
-Astronomer currently runs 24/7 on a Heroku Server.
+Astronomer currently runs 24/7 on a Heroku Server. 
 
 Here are examples usages of current commands that Astronomer has: 
 
