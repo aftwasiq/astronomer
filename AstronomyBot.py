@@ -1,8 +1,5 @@
 import discord
-from discord.ext import commands
 import bs4
-from bs4 import BeautifulSoup
-
 import requests
 import datetime
 import mwapi
@@ -10,13 +7,8 @@ import wikipediaapi
 import asyncio
 import random
 
-#I have this list of Celestial Bodies for randomization as some objects dont fullfill all the list of attributes, so instead of searching for random one on wikipedia, it'll get a random one from here than get it's info. When a user does $locate_random, I don't want them to find an object that only has some attributes. Of course, I still have to troubleshoot further in order to make sure every object flawlessly showcases every single attribute, until then I'll just keep adding objects I think are cool (and fullfill the object requirements) to this list.
-
-CELESTIAL_BODIES = [
-    "Antares", "Proxima Centauri", "Betelgeuse", "Aldebaran", "Altair",
-    "Andromeda Galaxy", "Pinwheel Galaxy", "Black Eye Galaxy", "Messier 81",
-    "Cygnus X-1", "TON 618", "Sagittarius A*"
-]
+from discord.ext import commands
+from bs4 import BeautifulSoup
 
 random_objects_settings = {}
 
@@ -46,6 +38,8 @@ async def locate_random(ctx):
     except Exception as e:
         await ctx.send(f"> Could not retrieve Astronomical Data. Error: {e}")
 
+
+@bot.command()
 async def locate_celestial_object(ctx, celestial_object):
     try:
         session = mwapi.Session("https://en.wikipedia.org/", user_agent="AstronomyBot/1.0")
@@ -131,6 +125,8 @@ async def locate_celestial_object(ctx, celestial_object):
     except Exception as e:
         await ctx.send(f"> Could not retrieve Astronomical Data. Error: {e}")
 
+
+
 @bot.command()
 async def set(ctx, channel: discord.TextChannel, time: int):
     try:
@@ -146,6 +142,8 @@ async def set(ctx, channel: discord.TextChannel, time: int):
     except Exception as e:
         await ctx.send(f"> Failed to set random astronomy objects. Error: {e}")
 
+
+@bot.command()
 async def send_random_objects(channel, time):
     try:
         while True:
@@ -155,6 +153,7 @@ async def send_random_objects(channel, time):
 
     except Exception as e:
         print(f"Error in sending random objects: {e}")
+
 
 @bot.command()
 async def locate(ctx, *, celestial_object):
@@ -315,6 +314,7 @@ async def photo(ctx, *, date: str = ""):
     embed.set_image(url = data["url"])
     await ctx.send(embed = embed)
     
+
 @bot.command()
 async def asteroids(ctx, *, date: str = ""):
     if date == "today":
@@ -352,7 +352,8 @@ async def asteroids(ctx, *, date: str = ""):
         embed.add_field(name="Orbiting Body", value = orbiting_body, inline=False)
     
     await ctx.send(embed=embed)
-    
+
+
 @bot.command()
 async def astronomy_help(ctx):
     embed = discord.Embed(title="Astronomer | Bot Commands", color=discord.Color.blue())
@@ -391,4 +392,3 @@ async def astronomy_help(ctx):
     await ctx.send(embed = embed)
 
 bot.run(token)
-
