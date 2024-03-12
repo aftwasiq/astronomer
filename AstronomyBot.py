@@ -86,12 +86,44 @@ class AstronomyBot(commands.Bot):
                     data = row.find("td")
 
                     if header and data:
-                        # Add more conditions for additional fields as needed
                         if "Epoch" in header.text or "Equinox" in header.text:
                             embed.add_field(name=f"`Stellar Position:` {data.text}", value="", inline=False)
                         
                         elif "Constellation" in header.text:
                             embed.add_field(name=f"`Constellation:` {data.text}", value="", inline=False)
+                            
+                        elif "Distance" in header.text and ("Earth" in header.text or "Sun" in header.text):
+                            embed.add_field(name=f"`Distance from Earth:` {data.text}", value = "", inline=False)
+                            
+                        elif "Evolutionary" in header.text:
+                            embed.add_field(name=f"`Evolutionary Stage:` {data.text}", value = "", inline=False)
+                            
+                        elif "Redshift" in header.text:
+                            embed.add_field(name=f"`Redshift:` {data.text}", value = "", inline=False)
+                            
+                        elif "Luminosity" in header.text:
+                            embed.add_field(name=f"`Luminosity:` {data.text}", value = "", inline=False)
+                            
+                        elif "Temperature" in header.text:
+                            embed.add_field(name=f"`Temperature:` {data.text}", value = "", inline=False)
+                            
+                        elif "Discovery date" in header.text:
+                            embed.add_field(name=f"`Discovery date:` {data.text}", value = "", inline=False)
+                            
+                        elif "Star" in header.text:
+                            embed.add_field(name=f"`Orbiting Star:` {data.text}", value = "", inline=False)
+                            
+                        elif "Inclination" in header.text:
+                            embed.add_field(name=f"`Inclination:` {data.text}", value = "", inline=False)
+                            
+                        elif "Surface gravity" in header.text:
+                            embed.add_field(name=f"`Surface gravity:` {data.text}", value = "", inline=False)
+                            
+                        elif "Right ascension" in header.text:
+                            embed.add_field(name=f"`Right Ascension:` {data.text}", value = "", inline=False) 
+                            
+                        elif "Declination" in header.text:
+                            embed.add_field(name=f"`Declination:` {data.text}", value = "", inline=False) 
 
             if image_url:
                 embed.set_image(url=image_url)
@@ -165,12 +197,44 @@ class AstronomyBot(commands.Bot):
                     data = row.find("td")
 
                     if header and data:
-                        # Add more conditions for additional fields as needed
                         if "Epoch" in header.text or "Equinox" in header.text:
                             embed.add_field(name=f"`Stellar Position:` {data.text}", value="", inline=False)
                         
                         elif "Constellation" in header.text:
                             embed.add_field(name=f"`Constellation:` {data.text}", value="", inline=False)
+                            
+                        elif "Distance" in header.text and ("Earth" in header.text or "Sun" in header.text):
+                            embed.add_field(name=f"`Distance from Earth:` {data.text}", value = "", inline=False)
+                            
+                        elif "Evolutionary" in header.text:
+                            embed.add_field(name=f"`Evolutionary Stage:` {data.text}", value = "", inline=False)
+                            
+                        elif "Redshift" in header.text:
+                            embed.add_field(name=f"`Redshift:` {data.text}", value = "", inline=False)
+                            
+                        elif "Luminosity" in header.text:
+                            embed.add_field(name=f"`Luminosity:` {data.text}", value = "", inline=False)
+                            
+                        elif "Temperature" in header.text:
+                            embed.add_field(name=f"`Temperature:` {data.text}", value = "", inline=False)
+                            
+                        elif "Discovery date" in header.text:
+                            embed.add_field(name=f"`Discovery date:` {data.text}", value = "", inline=False)
+                            
+                        elif "Star" in header.text:
+                            embed.add_field(name=f"`Orbiting Star:` {data.text}", value = "", inline=False)
+                            
+                        elif "Inclination" in header.text:
+                            embed.add_field(name=f"`Inclination:` {data.text}", value = "", inline=False)
+                            
+                        elif "Surface gravity" in header.text:
+                            embed.add_field(name=f"`Surface gravity:` {data.text}", value = "", inline=False)
+                            
+                        elif "Right ascension" in header.text:
+                            embed.add_field(name=f"`Right Ascension:` {data.text}", value = "", inline=False) 
+                            
+                        elif "Declination" in header.text:
+                            embed.add_field(name=f"`Declination:` {data.text}", value = "", inline=False) 
 
             if image_url:
                 embed.set_image(url=image_url)
